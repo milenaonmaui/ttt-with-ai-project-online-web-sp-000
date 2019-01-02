@@ -20,6 +20,14 @@ class Game
    end
 
    def current_player
-     turn_count(@player_1) < turn_count(@player_2)? player_1:player_2
+     turn_count(@player_1) <= turn_count(@player_2)? player_1 : player_2
+   end
+
+   def won?
+     WIN_COMBINATIONS.any? do |combo|
+      if position_taken?(combo[0]) && @board[combo[0]] == @board[combo[1]] && @board[combo[1]] == @board[combo[2]]
+        return combo
+      end
+    end
    end
 end
