@@ -16,7 +16,7 @@ class Game
 
    end
    def turn_count(player)
-     @board.cells.count{|square| square != player.token }
+     @board.cells.count{|square| square == player.token }
    end
 
    def current_player
@@ -25,9 +25,37 @@ class Game
 
    def won?
      WIN_COMBINATIONS.any? do |combo|
-      if position_taken?(combo[0]) && @board[combo[0]] == @board[combo[1]] && @board[combo[1]] == @board[combo[2]]
+      if @board.taken?(combo[0]+1) && @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
         return combo
+      elsif
+        !@board.full? #draw
       end
     end
    end
-end
+
+   def draw?
+     @board.full? && !won?
+   end
+
+   def over?
+      won? || draw?
+   end
+
+   def winner
+      if combo = won?
+        @board.cells[combo[0]]
+      else
+        return nil
+      end
+   end
+
+   def turn
+     puts "Please enter a number (1-9):"
+     user_input = gets.strip
+     if @board.valid_move?(user_input)
+        @board.update(user_input, current_player)
+     else
+        puts "Try again"
+      end
+   end
+end #class
