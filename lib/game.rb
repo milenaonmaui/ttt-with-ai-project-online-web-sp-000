@@ -50,12 +50,11 @@ class Game
    end
 
    def turn
-     puts "Please enter a number (1-9):"
-     user_input = gets.strip
+     user_input = current_player.move(@board)
      if @board.valid_move?(user_input)
         @board.update(user_input, current_player)
      else
-        puts "Try again"
+        turn
       end
    end
 end #class
