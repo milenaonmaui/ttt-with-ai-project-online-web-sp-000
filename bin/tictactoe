@@ -1,3 +1,24 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+# 1. Greet the user with a message.
+# 2. Prompt the user for what kind of game they want to play, 0,1, or 2 player.
+# 3. Ask the user for who should go first and be "X".
+# 4. Use the input to correctly initialize a `Game` with the appropriate
+#    player types and token values.
+# 5. When the game is over, the CLI should prompt the user if they would
+#   like to play again and allow them to choose a new configuration
+#   for the game as described above. If the user doesn't want to play again,
+#  exit the program.
+puts "Welcome to Tic Tac Toe!"
+puts "What kind of game would you like to play?"
+puts "Enter 0 for computer-only, 1 for one human player, 2 for two human players:
+input = gets.strip
+case input
+when "0"
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+when "1"
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+when "2"
+  game - Game.new
+end
