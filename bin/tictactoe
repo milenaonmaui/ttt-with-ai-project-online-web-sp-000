@@ -12,7 +12,7 @@ require_relative '../config/environment'
 #  exit the program.
 puts "Welcome to Tic Tac Toe!"
 puts "What kind of game would you like to play?"
-puts "Enter 0 for computer-only, 1 for one human player, 2 for two human players:
+puts "Enter 0 for computer-only, 1 for one human player, 2 for two human players:"
 input = gets.strip
 case input
 when "0"
@@ -20,5 +20,6 @@ when "0"
 when "1"
   game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
 when "2"
-  game - Game.new
+  game = Game.new
 end
+game.play
